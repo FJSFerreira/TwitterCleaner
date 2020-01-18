@@ -23,10 +23,13 @@ since_id = 1
 to_delete = []
 
 for tweet in timeline:
-    if tweet.created_at < threshold_date:
-        print('ID {} adicionado a lista de tweets a eliminar'.format(tweet.id))
-        to_delete.append(tweet.id)
-        since_id = tweet.id
+	if 'Verifying myself' in tweet.text:
+		print('A ignorar tweet de verificacao')
+		continue
+	if tweet.created_at < threshold_date:
+		print('ID {} adicionado a lista de tweets a eliminar'.format(tweet.id))
+		to_delete.append(tweet.id)
+		since_id = tweet.id
 
 print('Serao apagados {} tweets (antes de filtragem)'.format(len(to_delete)))
 
@@ -52,4 +55,4 @@ print('Serao apagados {} tweets (apos filtrar conversas)'.format(len(to_delete))
 
 for tweet in to_delete:
 	print('A eliminar tweet com o ID {}...'.format(tweet))
-	api.destroy_status(tweet)     
+	api.destroy_status(tweet)
