@@ -23,7 +23,7 @@ since_id = 1
 to_delete = []
 
 for tweet in timeline:
-	if 'Verifying myself' in tweet.text:
+	if tweet.id in config.tweets_to_keep:
 		print('A ignorar tweet de verificacao')
 		continue
 	if tweet.created_at < threshold_date:
